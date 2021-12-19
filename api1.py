@@ -9,6 +9,7 @@ def search_film(keyword, k=0):
         id=response['films'][k]['filmId']),
                   headers={'X-API-KEY':secret_data.film_api_token})
     response_film_data = request_film_data.json()
+    print(response_film_data)
     try:
         genres = []
         for genre in response_film_data['data']['genres']:
@@ -34,7 +35,7 @@ def view_newFilms(month):
                   headers={'X-API-KEY':'2ff08927-e551-4477-a286-2dc5e81c8477'})
     response = request.json()
     for film in response['releases']:
-        if film['year'] == 2020:
+        if film['year'] == 2021:
             id = film['filmId']
             request_film_data = requests.get(
             'https://kinopoiskapiunofficial.tech/api/v2.1/films/{id}?append_to_response=RATING'.format(
