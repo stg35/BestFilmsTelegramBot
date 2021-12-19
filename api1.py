@@ -2,6 +2,12 @@ import requests
 import secret_data
 
 def search_film(keyword, k=0):
+    """
+    Function finds data about a movie by its link
+
+    Returns:film_data
+
+    """
     request = requests.get('https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword={0}&page=1'.format(keyword),
                   headers={'X-API-KEY':secret_data.film_api_token})
     response = request.json()
@@ -29,6 +35,12 @@ def search_film(keyword, k=0):
     return film_data
 
 def view_newFilms(month):
+    """
+    Function shows new movies
+
+     Returns:Films
+
+    """
     films = []
     request = requests.get('https://kinopoiskapiunofficial.tech/api/v2.1/films/releases?year=2020&month={0}&page={1}'.format(month, 1),
                   headers={'X-API-KEY':'2ff08927-e551-4477-a286-2dc5e81c8477'})
@@ -57,6 +69,12 @@ def view_newFilms(month):
     return films
 
 def getNameOfFilm(filmId):
+    """
+    Function shows the name of the movie by its id
+
+    Returns:response_film_data['data']['nameRu']
+
+    """
     request_film_data = requests.get(
         'https://kinopoiskapiunofficial.tech/api/v2.1/films/{id}?append_to_response=RATING'.format(
             id=filmId),
@@ -65,6 +83,12 @@ def getNameOfFilm(filmId):
     return response_film_data['data']['nameRu']
 
 def getFilmByID(filmID):
+    """
+    Function shows information about the movie by id
+
+     Returns:film_data
+
+    """
     request_film_data = requests.get(
         'https://kinopoiskapiunofficial.tech/api/v2.1/films/{id}?append_to_response=RATING'.format(
             id=filmID),
