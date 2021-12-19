@@ -19,21 +19,41 @@ viewed_selections = []
 
 @bot.message_handler(commands=['start'])
 def handler_quiz(message):
+    '''
+    Function send user welcome message after typing start
+    :param message:
+    :return: nothing
+    '''
     print(message)
     db.addUser(int(message.from_user.id))
     bot.send_message(message.chat.id, messages['start'].format(username=message.from_user.username), reply_markup=markups['main_markup'])
 
 @bot.message_handler(func=lambda msg: msg.text == buttons['search_film'])
 def searching1(message):
+    '''
+    Function send message to input name of film
+    :param message:
+    :return: nothing
+    '''
     bot.send_message(message.chat.id, messages['input_film'])
     booleans['isSearchButton'] = True
 
 @bot.message_handler(func=lambda msg: msg.text == buttons['recommend_film'])
 def selection(message):
+    '''
+    Function send message to choose selection of films
+    :param message:
+    :return: nothing
+    '''
     bot.send_message(message.chat.id, messages['selection0'], reply_markup=markups['selection0_markup'])
 
 @bot.message_handler(func=lambda msg: msg.text == buttons['wish_list'])
 def view_wishlist(message):
+    '''
+    Function send to user his wishlist
+    :param message:
+    :return: nothing
+    '''
     try:
         list = db.viewWishlist(message.from_user.id)
         for id in list:
@@ -43,6 +63,12 @@ def view_wishlist(message):
 
 @bot.message_handler(content_types=['text'])
 def message_handler(message):
+    '''
+    Function makes several tasks
+    Check run different codes depend on what user write in input section or choose in markup
+    :param message:
+    :return: nothing
+    '''
     global counter
     global film_name
     global filmId
@@ -104,6 +130,11 @@ def message_handler(message):
 
 @bot.callback_query_handler(func=lambda call: call.data)
 def callback_inline(call):
+    '''
+    Function makes several tasks depend on what user choose in inline keyboard markup
+    :param call:
+    :return: nothing
+    '''
     global filmId
     global current_selection_data
     global viewed_films
