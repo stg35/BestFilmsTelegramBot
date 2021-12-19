@@ -2,7 +2,7 @@ import telebot
 import secret_data
 from constants import messages, buttons, markups, booleans
 import db
-from api1 import search_film, getNameOfFilm, view_newFilms, getFilmByID
+from KinopoiskApiRequests import search_film, getNameOfFilm, view_newFilms, getFilmByID
 from random import randint
 
 bot = telebot.TeleBot(secret_data.telegram_api_token)
